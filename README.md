@@ -45,7 +45,7 @@ The dataset consists of multiple CSV files detailing various aspects of football
 - **Player Club**: Tracks player affiliations with clubs and their tenure periods.
 - **Player Valuations**: Specific valuation details of players at different times.
   
-<img width="459" alt="image" src="https://github.com/user-attachments/assets/b5cc624c-9d59-43a9-b1fb-798b31c8ed4f">
+<img width="893" alt="image" src="https://github.com/user-attachments/assets/23abe124-0905-44dd-9c0b-43abb6d803ae">
 
 
 You can find the data here : https://data.world/dcereijo/player-scores. 
