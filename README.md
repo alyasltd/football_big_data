@@ -45,6 +45,8 @@ The dataset consists of multiple CSV files detailing various aspects of football
 - **Player Club**: Tracks player affiliations with clubs and their tenure periods.
 - **Player Valuations**: Specific valuation details of players at different times.
 
+You can find the data here : https://data.world/dcereijo/player-scores. 
+
 ## Tools and Technologies
 
 - **PySpark**: For large-scale data processing and analysis.
