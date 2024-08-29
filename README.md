@@ -44,6 +44,8 @@ The dataset consists of multiple CSV files detailing various aspects of football
 - **Market Values**: Historical records of player market valuations over time.
 - **Player Club**: Tracks player affiliations with clubs and their tenure periods.
 - **Player Valuations**: Specific valuation details of players at different times.
+  
+![image](https://github.com/user-attachments/assets/7b3964dd-93b2-402c-87de-e2bc9367686f)
 
 You can find the data here : https://data.world/dcereijo/player-scores. 
 
