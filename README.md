@@ -11,26 +11,105 @@ This project aims to utilize Big Data techniques with PySpark to analyze and pre
 - Ligue 1 :fr:
 - UEFA Champions League 🏆 (only for predicting club victories using time series analysis)
 
-## Project Objectives
+---
 
-1. **Player Performance Analysis:**
-   - Use player appearance data to analyze individual and team performance over time. This includes identifying the most consistent players, top goal scorers, assist providers, and those with the highest number of yellow cards.
-   - Analyze the evolution of goals scored per season by each team and on an individual player basis.
-   - Explore the relationship between goals scored and a player's market value to determine if players with higher goal counts tend to have a higher market value.
+## 1. **Market Value and Performance Analysis of Top Clubs 🏆💰**
+### Method:
+- **Data Preparation**: Merged two datasets—one with match statistics and the other with market value data for each club.
+- **Analysis**: Focused on identifying the top clubs based on goals scored and their average market value.
+- **Techniques**:
+  - Used **PySpark** DataFrame operations for joining datasets, aggregating goals, and calculating the average market value.
+  - Employed **UDFs** (User Defined Functions) to format market values into a human-readable format (e.g., adding commas and "euros").
+- **Why**: To identify if there is a correlation between goals scored and the market value of clubs. This gives insight into both performance and financial worth of top clubs.
 
-2. **Market Value Analysis:**
-   - Utilize historical records of player market values to analyze factors that influence a player's market value, such as age, performance metrics, and the current club.
-   - Develop a predictive model to estimate future market values of players based on their current and past performances.
+---
 
-3. **Player Transfer Analysis:**
-   - Analyze transfer trends between clubs and leagues. This includes visualizing transfer flows to identify which clubs or leagues spend the most or are most active in the transfer market.
-   - Use visualization tools, such as maps, to illustrate the transfer activities and trends across different leagues and clubs.
+## 2. **Impact of Goal Average on Player Market Value 🎯💵**
+### Method:
+- **Data Preparation**:
+  - Aggregated player statistics (total goals, matches, and average market value).
+  - Calculated the **goal average** for each player (total goals / total matches).
+- **Analysis**:
+  - Applied **linear regression** to understand the relationship between a player's goal average and market value.
+  - Used **log transformations** to normalize data for better model performance.
+  - Trained the model using **PySpark's LinearRegression**.
+- **Why**: To determine if a player's performance (goal average) influences their market value, providing insights into the financial evaluation of players.
 
-4. **Prediction of UEFA Champions League Results:**
-   - With the introduction of the new UEFA format where clubs of different levels meet more frequently, this project will leverage the dataset to predict the outcomes of the Champions League league phase.
-   - Implement time series analysis to forecast the results of Champions League matches, taking into account the historical performance data of the clubs.
+---
 
-Here's a shorter version of each table summary to match the style you provided:
+## 3. **Exploring Bloom Filters vs. Exact Counting for Duplicate Games 🔄🚫**
+### Method:
+- **Bloom Filters**: 
+  - Utilized **Bloom filters** to identify and eliminate duplicate game entries based on game IDs, ensuring fast performance with low memory usage.
+  - Created a **UDF** to check for duplicates and filtered data accordingly.
+- **Exact Counting**: 
+  - Compared Bloom filters with the **`countDistinct`** approach to analyze the impact on match data processing, especially in calculating goals per match.
+- **Why**: **Bloom filters** provide quick, approximate data processing. The comparison aimed to assess trade-offs between speed and accuracy when dealing with large amounts of data in football match analysis.
+
+---
+
+## 4. **Evolution of Goal Average in Top Leagues 📉⚽**
+### Method:
+- **Data Preparation**:
+  - Analyzed the goal average of top clubs in major European leagues (England, Spain, Italy, Germany, France) over multiple years.
+- **Analysis**:
+  - Calculated the **average goals per match** for each club every season.
+  - Compared performance trends across the leagues over time.
+- **Visualization**:
+  - Used **matplotlib** to visualize the change in goal averages for each club, helping to understand how performance has evolved.
+- **Why**: To track the performance trends of top clubs and how their goal-scoring efficiency has shifted over time, which may be influenced by various factors like team changes, tactics, and more.
+
+---
+
+## 5. **Predicting Champions League Outcomes Using Poisson Distribution 🏆📊**
+### Method:
+- **Poisson Model**:
+  - Utilized the **Poisson distribution** to estimate the probability of different match outcomes (win, draw, loss) based on goals scored and conceded.
+  - Applied **adjustments** to give more weight to goals scored by each team using coefficients for both home and away teams.
+- **Analysis**:
+  - Generated a **probability matrix** for match outcomes (home win, draw, away win) using Poisson probabilities.
+  - Calculated the match outcomes using this matrix.
+- **Why**: The **Poisson distribution** is widely used in sports analytics for modeling goal-scoring events. It’s perfect for predicting football match outcomes based on historical data.
+
+---
+
+## 6. **Real-Time Elo Ratings with Spark Streaming ⏱️📈**
+### Method:
+- **Data Streaming**: 
+  - Set up **Spark Streaming** to process real-time match data from a socket server simulating live match events.
+  - Updated **Elo ratings** dynamically after every match using a custom `update_team_info` function.
+- **Elo Rating System**: 
+  - Implemented the **Elo rating system**, which adjusts each team's rating after every match based on the result (win, loss, or draw) and the opponent's rating.
+  - Calculated **win probabilities** using the Elo formula.
+- **Why**: **Elo ratings** are commonly used in competitive sports to rank teams and players. This allowed real-time updates of the rankings and win probabilities based on match results.
+
+---
+
+## 7. **Real-Time Prediction Using Elo Ratings and Match Results ⚡📊**
+### Method:
+- **Socket Data Simulation**:
+  - Simulated real-time match data using a **socket server**, processing incoming match data and updating the Elo ratings accordingly.
+  - The system recalculated **win probabilities** after each match based on the updated Elo ratings.
+- **Real-Time Updates**: 
+  - Using **`foreachBatch`**, the streaming job continuously updated the Elo ratings and win probabilities.
+- **Why**: This system allows for real-time predictions and updates of match outcomes based on the latest data, which is crucial for dynamic sports analytics platforms.
+
+---
+
+## 8. **Future Directions 🚀🔮**
+- **Enhancements to Elo Model**: While the Elo rating system is effective, it doesn't account for recent team form. Future improvements could involve incorporating factors like winning streaks or player performance.
+- **Deep Learning for Match Predictions**: A potential next step could be the exploration of **deep learning models** (like neural networks) for predicting football match outcomes using more detailed data (e.g., player-level statistics).
+
+---
+
+## Technologies Used:
+- **Apache Spark**: For distributed data processing and real-time analytics.
+- **PySpark**: To interact with Spark and handle large-scale datasets.
+- **Poisson Distribution**: Used for modeling football match outcomes and predicting the probability of goals.
+- **Bloom Filters**: For fast, approximate deduplication of match data.
+- **Matplotlib/Plotly**: For data visualization and displaying trends.
+- **Socket Programming**: To simulate real-time data streaming for dynamic updates.
+
 
 ## Dataset
 
@@ -49,11 +128,3 @@ The dataset consists of multiple CSV files detailing various aspects of football
 
 
 You can find the data here : https://data.world/dcereijo/player-scores. 
-
-## Tools and Technologies
-
-- **PySpark**: For large-scale data processing and analysis.
-- **Python**: For scripting and running analyses.
-- **SQL**: For querying and managing datasets.
-- **Visualization Libraries**: Plotly, matplotlib for creating visual representations of the data.
-- **Jupyter Notebooks**: For developing and documenting the analysis process.
