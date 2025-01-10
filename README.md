@@ -9,7 +9,7 @@ This project aims to utilize Big Data techniques with PySpark to analyze and pre
 - Premier League :uk:
 - Serie A :it:
 - Ligue 1 :fr:
-- UEFA Champions League 🏆 (only for predicting club victories using time series analysis)
+- UEFA Champions League 🏆
 
 ---
 
